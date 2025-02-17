@@ -163,14 +163,22 @@ function Body() {
                     </li>
                 </ul>
             </nav>
-            <button className='ml-[1rem] '>
-                <SearchIcon className='text-blue-500 h-6 w-6 md:mr-[1rem] ' onClick={() => setIsSearchOpen(!isSearchOpen)}/>
-                {isSearchOpen && (
-                <div className="absolute top-10 right-[1rem] left-[60%] bg-white p-2 shadow-md rounded-lg flex">
-                <input type="text" placeholder="Search..." className="w-full p-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"/>
-                <XIcon className={`${isSearchOpen?undefined:'rotate-180 duration-100 ease-in'}h-6 w-6 text-black ml-2 mr-2`} onClick={setIsSearchOpen}/>
-                </div>)}
-            </button>
+            <button className='ml-[1rem]' onClick={() => setIsSearchOpen(!isSearchOpen)}>
+          <SearchIcon className='text-blue-500 h-6 w-6 md:mr-[1rem]' />
+        </button>
+
+        {isSearchOpen && (
+          <div className="absolute top-10 right-[1rem] left-[60%] bg-white p-2 shadow-md rounded-lg flex">
+            <div className='flex w-full border rounded-md focus-within:ring-1 focus-within:ring-blue-400'>
+              <input type="text" placeholder="Search..." className="w-full focus:outline-none" />
+              <button type="submit">
+                <SearchIcon className='h-6 w-6  text-gray-500'/>
+              </button>
+              <XIcon className='h-8 w-8 text-black ml-2 mr-2 cursor-pointer mt-1 text-gray-500' onClick={() => setIsSearchOpen(false)} />
+            </div>
+          </div>
+        )}
+
 
             <button className='mr-[1rem] md:hidden'>
               <MenuIcon className={`h-6 w-6 text-gray-900 ease-in-out duration-500 ${rotated ? "rotate-180" : "rotate-0"}`} onClick={() => { toggleNav(); setRotated(!rotated); }} />
