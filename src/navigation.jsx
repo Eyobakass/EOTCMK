@@ -3,7 +3,7 @@ import { SearchIcon, MenuIcon } from "@heroicons/react/outline";
 import { XIcon } from "@heroicons/react/solid";
 import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/outline";
 
-function SmallScreenNav({ isOpen, toggleNav }) {
+function SmallScreenNav({ isOpen, toggleNav,  }) {
   return (
     <div
       className={`fixed top-0 right-0 h-full w-[60%] bg-white shadow-lg transform ${
@@ -17,12 +17,12 @@ function SmallScreenNav({ isOpen, toggleNav }) {
         <button onClick={toggleNav} className=" mr-[3rem]">
           <XIcon
             className={`${
-              isOpen ? undefined : "rotate-180 duration-100 ease-in"
+              isOpen ? '' : "rotate-180 duration-100 ease-in"
             }h-6 w-6 text-black`}
           />
         </button>
       </nav>
-      <ul className="flex flex-col space-y-4 ml-[2rem] mt-[2rem">
+      <ul className="flex flex-col space-y-4 ml-[2rem] mt-[2rem]">
         <li className="whitespace-nowrap flex justify-between hover:bg-slate-400 bg-slate-300 ease-in duration-150 w-[85%] p-3 rounded-lg">
           <a href="#" className="">
             ቀዳሚ ገጽ
@@ -55,23 +55,37 @@ function SmallScreenNav({ isOpen, toggleNav }) {
     </div>
   );
 }
-function Logo() {
+function Logo({small}) {
   return (
     <div className="flex items-center space-x-4">
       {/* Logo Image */}
       <img
         src="logo.png"
         alt="MK-Logo"
-        className="w-12 h-auto ml-4 md:w-16 xl:w-20"
+        className={`${
+          small ? "h-[6vh]" : "w-12 h-auto ml-4 md:w-20 lg:w-16 xl:w-20"
+        }`}
       />
 
       {/* Text Content */}
       <div className="text-left">
-        <h2 className="text-gray-900 font-semibold leading-snug text-[0.8rem] md:text-[0.8rem] mainLogo:text-lg ">
+        <h2
+          className={` ${
+            small
+              ? "text-[0.8rem] md:text-[0.8rem] md:hidden lg:block text-gray-900 font-semibold leading-snug"
+              : "text-[1rem] md:text-[01rem] text-gray-900 font-semibold leading-snug md:hidden lg:block "
+          }`}
+        >
           በኢትዮጵያ ኦርቶዶድስ ተዋህዶ ቤተክርስቲያን <br />
           በሰንበት ትምህርት ቤቶች ማደራጃ መምሪያ
         </h2>
-        <h2 className="text-red-600 text-[0.8rem] font-bold md:text-[0.8rem] mainLogo:text-lg ">
+        <h2
+          className={`${
+            small
+              ? "hidden"
+              : "text-red-600 text-[0.8rem] font-bold md:hidden lg:text-[0.8rem] lg:block  "
+          }`}
+        >
           ማኅበራዊ ጉዳዮች
         </h2>
       </div>
@@ -142,10 +156,10 @@ function Body() {
         <header className="w-[100%]">
           <div
             className={`fixed top-0 left-0 w-full flex justify-between bg-[url('cloud.png')] bg-cover bg-center backdrop-blur-sm transition-all duration-300 pl-[5%] pr-[5%] ${
-              small ? "h-[5vh]" : "h-[10vh] md:h-[15vh]"
+              small ? "h-[8vh] pl-[7%] pr-[7%]" : "h-[10vh] md:h-[15vh]"
             }`}
           >
-            <Logo />
+            <Logo small={small} />
             <nav className="h-[100%]">
               <ul className="hidden md:flex  text-gray h-[100%] justify-center">
                 <li className="h-[100%] flex flex-col justify-end hover:bg-slate-300 hover:bg-opacity-20 hover:text-gray-900 duration-100 ">
@@ -158,7 +172,7 @@ function Body() {
                   <span className="block w-[fill] h-[2px] bg-red-900 rounded-full mt-auto duration-100"></span>
                 </li>
                 <li
-                  className={`h-[100%] flex flex-col justify-end hover:bg-slate-300 hover:bg-opacity-20 hover:text-gray-900 duration-300 group`}
+                  className={`h-[100%] flex flex-col justify-end hover:bg-slate-300 hover:bg-opacity-20 hover:text-gray-900 duration-300 ease-in group`}
                   onMouseEnter={toggleAboutEnter}
                   onMouseLeave={toggleAboutLeave}
                 >
@@ -168,11 +182,11 @@ function Body() {
                   >
                     ስለማኅበሩ
                   </a>
-                  <span className="block w-[fill] h-[2px] group-hover:bg-red-900 rounded-full mt-auto duration-100"></span>
+                  <span className="block w-[fill] h-[2px] group-hover:bg-red-900 rounded-full mt-auto duration-300 ease-in"></span>
                   <div
                     className={`${
                       about
-                        ? "grid grid-cols-2 max-w-[400px] absolute top-full left-0 bg-gray-100 rounded divide-x divide-gray-400 rounded-tl-none"
+                        ? "grid grid-cols-2 max-w-[400px] absolute top-full bg-white rounded divide-x divide-gray-400 rounded-tl-none"
                         : "hidden"
                     } excludeAbout`}
                     onMouseLeave={toggleAboutLeave}
@@ -248,7 +262,7 @@ function Body() {
                 </li>
 
                 <li
-                  className={`h-[100%] flex flex-col justify-end hover:bg-slate-300 hover:bg-opacity-20 hover:text-gray-900 duration-100 group `}
+                  className={`h-[100%] flex flex-col justify-end hover:bg-slate-300 hover:bg-opacity-20 hover:text-gray-900 duration-300 ease-in group `}
                   onMouseEnter={toggleLearnEnter}
                   onMouseLeave={toggleLearnLeave}
                 >
@@ -258,11 +272,11 @@ function Body() {
                   >
                     ትምህርቶች
                   </a>
-                  <span className="block w-[fill] h-[2px] group-hover:bg-red-900 rounded-full mt-auto duration-100"></span>
+                  <span className="block w-[fill] h-[2px] group-hover:bg-red-900 rounded-full mt-auto duration-300 ease-in"></span>
                   <div
                     className={`${
                       learn
-                        ? "grid grid-cols-1 max-w-[300px] absolute left-[52vw] bg-gray-100 rounded divide-x divide-gray-400 rounded-tl-none"
+                        ? "grid grid-cols-1 max-w-[300px] absolute top-full bg-white rounded divide-x divide-gray-400 rounded-tl-none"
                         : "hidden"
                     } excludeLearn`}
                     onMouseLeave={toggleLearnLeave}
@@ -280,17 +294,17 @@ function Body() {
                     </ul>
                   </div>
                 </li>
-                <li className="h-[100%] flex flex-col justify-end hover:bg-slate-300 hover:bg-opacity-20 hover:text-gray-900 duration-100 group ">
+                <li className="h-[100%] flex flex-col justify-end hover:bg-slate-300 hover:bg-opacity-20 hover:text-gray-900 duration-300 ease-in group ">
                   <a
                     href="#"
                     className="whitespace-nowrap block mt-auto pr-[1vw] pl-[1vw]"
                   >
                     ጊቢ ጉባኤ
                   </a>
-                  <span className="block w-[fill] h-[2px] group-hover:bg-red-900 rounded-full mt-auto duration-100"></span>
+                  <span className="block w-[fill] h-[2px] group-hover:bg-red-900 rounded-full mt-auto duration-300 ease-in"></span>
                 </li>
                 <li
-                  className={`h-[100%] flex flex-col justify-end hover:bg-slate-300 hover:bg-opacity-20 hover:text-gray-900 duration-100 group `}
+                  className={`h-[100%] flex flex-col justify-end hover:bg-slate-300 hover:bg-opacity-20 hover:text-gray-900 duration-300 ease-in group `}
                   onMouseEnter={toggleOthersEnter}
                   onMouseLeave={toggleOthersLeave}
                 >
@@ -300,11 +314,11 @@ function Body() {
                   >
                     ሌሎች ድረ ገጾች
                   </a>
-                  <span className="block w-[fill] h-[2px] group-hover:bg-red-900 rounded-full mt-auto duration-100"></span>
+                  <span className="block w-[fill] h-[2px] group-hover:bg-red-900 rounded-full mt-auto duration-300 ease-in"></span>
                   <div
                     className={`${
                       others
-                        ? "grid grid-cols-1 max-w-[300px] absolute left-[52vw] bg-gray-100 rounded divide-x divide-gray-400 rounded-tl-none"
+                        ? "grid grid-cols-1 max-w-[300px] absolute top-full bg-white rounded divide-x divide-gray-400 rounded-tl-none"
                         : "hidden"
                     } excludeOthers`}
                     onMouseLeave={toggleOthersLeave}
@@ -325,7 +339,7 @@ function Body() {
                   </div>
                 </li>
                 <li
-                  className={`h-[100%] flex flex-col justify-end hover:bg-slate-300 hover:bg-opacity-20 hover:text-gray-900 duration-100 group `}
+                  className={`h-[100%] flex flex-col justify-end hover:bg-slate-300 hover:bg-opacity-20 hover:text-gray-900 duration-300 ease-in group `}
                   onMouseEnter={toggleLanguageEnter}
                   onMouseLeave={toggleLanguageLeave}
                 >
@@ -335,11 +349,11 @@ function Body() {
                   >
                     ቋንቋ
                   </a>
-                  <span className="block w-[fill] h-[2px] group-hover:bg-red-900 rounded-full mt-auto duration-100"></span>
+                  <span className="block w-[fill] h-[2px] group-hover:bg-red-900 rounded-full mt-auto duration-300 ease-in"></span>
                   <div
                     className={`${
                       language
-                        ? "grid grid-cols-1 max-w-[300px] absolute left-[75vw] xl:left-[70vw] bg-gray-100 rounded divide-x divide-gray-400 rounded-tl-none"
+                        ? "grid grid-cols-1 max-w-[300px] absolute top-full xl:left-[70vw] bg-white rounded divide-x divide-gray-400 rounded-tl-none"
                         : "hidden"
                     } excludeLanguage`}
                     onMouseLeave={toggleLanguageLeave}
@@ -366,14 +380,14 @@ function Body() {
                     </ul>
                   </div>
                 </li>
-                <li className="h-[100%] flex flex-col justify-end hover:bg-slate-300 hover:bg-opacity-20 hover:text-gray-900 duration-100 group">
+                <li className="h-[100%] flex flex-col justify-end hover:bg-slate-300 hover:bg-opacity-20 hover:text-gray-900 duration-300 ease-in group">
                   <a
                     href="#"
                     className="whitespace-nowrap block mt-auto pr-[1vw] pl-[1vw]"
                   >
                     ያግኙን
                   </a>
-                  <span className="block w-[fill] h-[2px] group-hover:bg-red-900 rounded-full mt-auto duration-100"></span>
+                  <span className="block w-[fill] h-[2px] group-hover:bg-red-900 rounded-full mt-auto duration-300 ease-in"></span>
                 </li>
               </ul>
             </nav>
@@ -416,7 +430,7 @@ function Body() {
             </button>
           </div>
         </header>
-        <section className="bg-[#295CA4] block h-[40vh] mt-[10vh] md:mt-[15vh]">
+        <section className="bg-[#015896] block h-[40vh] mt-[10vh] md:mt-[15vh]">
           <h2 className=" bg-[black] bg-opacity-[0.5] bg w-max m-auto text-center text-3xl text-white whitespace-nowrap pl-[0.5rem] pr-[0.5rem]">
             እንኳን ደህና መጡ!
           </h2>
