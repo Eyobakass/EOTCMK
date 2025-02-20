@@ -102,13 +102,18 @@ function Body() {
   const [others, setOthers] = useState(false);
   const [language, setLanguage] = useState(false);
   const [small, setSmall] = useState(false);
-
+  const [large, setLarge] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => setLarge(window.scrollY > 500);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   useEffect(() => {
     const handleScroll = () => setSmall(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
+  
   const toggleNav = () => {
     setIsOpen(!isOpen);
   };
@@ -151,7 +156,7 @@ function Body() {
   };
 
   return (
-    <div>
+    <div id="logo">
       <div onClick={isOpen ? toggleNav : undefined} className="bg-[#295CA4]">
         <header className="w-[100%]">
           <div
@@ -353,7 +358,7 @@ function Body() {
                   <div
                     className={`${
                       language
-                        ? "grid grid-cols-1 max-w-[300px] absolute top-full xl:left-[70vw] bg-white rounded divide-x divide-gray-400 rounded-tl-none"
+                        ? "grid grid-cols-1 max-w-[300px] absolute top-full bg-white rounded divide-x divide-gray-400 rounded-tl-none"
                         : "hidden"
                     } excludeLanguage`}
                     onMouseLeave={toggleLanguageLeave}
@@ -438,6 +443,20 @@ function Body() {
         </section>
       </div>
       <SmallScreenNav isOpen={isOpen} toggleNav={toggleNav} />
+      <button
+        className={`${
+          large
+            ? "fixed hover:bg-opacity-80 bg-opacity-40 bg-[#6A6C6C] h-12 w-12 text-[0.8rem] pt-[0.4rem] text-white rounded bottom-10 right-10 duration-300 ease-out"
+            : "hidden"
+        }`}
+        onClick={() =>
+          document
+            .getElementById("logo")
+            ?.scrollIntoView({ behavior: "smooth" })
+        }
+      >
+        ^
+      </button>
     </div>
   );
 }

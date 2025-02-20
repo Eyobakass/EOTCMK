@@ -3,8 +3,9 @@ import { useState } from "react";
 function AboutUs() {
   const [count, setCount] = useState(0);
 
+  
   return (
-    <div className="bg-[#015896] pl-[6%] pr-[6%] pb-[2rem] pt-[2rem] text-white">
+    <div className="bg-[#015896] pl-[6%] pr-[6%] pb-[6rem] pt-[2rem] text-white">
       <h1 className="text-[2rem] mt-[1rem] "> ስለ ማኅበረ ቅዱሳን መሰረታዊ መረጃዎች</h1>
       <div className="md:flex">
         <main className="md:w-[55vw]">
@@ -87,14 +88,14 @@ function AboutUs() {
             </ul>
           </section>
         </main>
-        <aside className="">
-          <figure className="center">
+        <aside className="md:ml-auto">
+          <figure className="mt-[3rem] mb-[5rem]">
             <img
               src="abune-gorgorios.jpg"
-              className="md:w-[25vw] ml-auto mr-auto "
+              className="md:w-[28vw] ml-auto mr-auto"
               alt="አቡነ ጎርጎርዮስ ካልዕ"
             />
-            <figcaption className="">
+            <figcaption className="text-center text-[0.8rem] mt-[1rem]">
               አቡነ ጎርጎርዮስ ካልዕ
               <br /> የሸዋ ሊቀ ጳጳስ ፲፱፻፴፪-፲፱፻፹፪ዓ.ም.
             </figcaption>
@@ -103,10 +104,10 @@ function AboutUs() {
           <figure className="">
             <img
               src="mk-building1-450x378.jpg"
-              className="md:w-[25vw]"
+              className="md:w-[25vw] w-[50vw] ml-auto mr-auto md:ml-auto md:mr-auto "
               alt="የማኅበሩ ህንጻ"
             />
-            <figcaption className="">የማኅበሩ ህንጻ</figcaption>
+            <figcaption className="text-center text-[0.8rem] mt-[1rem] ">የማኅበሩ ህንጻ</figcaption>
           </figure>
         </aside>
       </div>
