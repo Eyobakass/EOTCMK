@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@heroicons/react": "^1.0.6",
+    "@heroicons/react": "^2.2.0",
     "node": "^23.7.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

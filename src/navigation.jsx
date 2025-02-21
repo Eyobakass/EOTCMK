@@ -1,9 +1,13 @@
-import { useState, useEffect } from "react";
-import { SearchIcon, MenuIcon } from "@heroicons/react/outline";
-import { XIcon } from "@heroicons/react/solid";
-import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/outline";
+import { useState, useEffect } from "react";import {
+  MagnifyingGlassIcon,
+  Bars3Icon,
+  XMarkIcon,
+  ChevronDownIcon,
+  ChevronRightIcon,
+} from "@heroicons/react/24/outline";
 
-function SmallScreenNav({ isOpen, toggleNav,  }) {
+
+function SmallScreenNav({ isOpen, toggleNav }) {
   return (
     <div
       className={`fixed top-0 right-0 h-full w-[60%] bg-white shadow-lg transform ${
@@ -12,12 +16,12 @@ function SmallScreenNav({ isOpen, toggleNav,  }) {
     >
       <nav className="flex justify-end h-[10vh]">
         <button className=" mr-[3rem]">
-          <SearchIcon className="text-black h-6 w-6 " />
+          <MagnifyingGlassIcon className="text-black h-6 w-6 " />
         </button>
         <button onClick={toggleNav} className=" mr-[3rem]">
-          <XIcon
+          <XMarkIcon
             className={`${
-              isOpen ? '' : "rotate-180 duration-100 ease-in"
+              isOpen ? "" : "rotate-180 duration-100 ease-in"
             }h-6 w-6 text-black`}
           />
         </button>
@@ -55,7 +59,7 @@ function SmallScreenNav({ isOpen, toggleNav,  }) {
     </div>
   );
 }
-function Logo({small}) {
+function Logo({ small }) {
   return (
     <div className="flex items-center space-x-4">
       {/* Logo Image */}
@@ -97,10 +101,6 @@ function Body() {
   const [isOpen, setIsOpen] = useState(false);
   const [rotated, setRotated] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [about, setAbout] = useState(false);
-  const [learn, setLearn] = useState(false);
-  const [others, setOthers] = useState(false);
-  const [language, setLanguage] = useState(false);
   const [small, setSmall] = useState(false);
   const [large, setLarge] = useState(false);
   useEffect(() => {
@@ -113,50 +113,13 @@ function Body() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  
+
   const toggleNav = () => {
     setIsOpen(!isOpen);
   };
-  const toggleAboutEnter = () => {
-    setAbout(true);
-  };
-  const toggleAboutLeave = (e) => {
-    if (e.relatedTarget && e.relatedTarget.closest(".excludeAbout")) {
-      return; // Skip if mouse enters the excluded area
-    }
-    setAbout(false); // Hide if the mouse leaves completely
-  };
-
-  const toggleLearnEnter = () => {
-    setLearn(true);
-  };
-  const toggleLearnLeave = (e) => {
-    if (e.relatedTarget && e.relatedTarget.closest(".excludeLearn")) {
-      return; // Skip if mouse enters the excluded area
-    }
-    setLearn(false); // Hide if the mouse leaves completely
-  };
-  const toggleOthersEnter = () => {
-    setOthers(true);
-  };
-  const toggleOthersLeave = (e) => {
-    if (e.relatedTarget && e.relatedTarget.closest(".excludeOthers")) {
-      return; // Skip if mouse enters the excluded area
-    }
-    setOthers(false); // Hide if the mouse leaves completely
-  };
-  const toggleLanguageEnter = () => {
-    setLanguage(true);
-  };
-  const toggleLanguageLeave = (e) => {
-    if (e.relatedTarget && e.relatedTarget.closest(".excludeLanguage")) {
-      return; // Skip if mouse enters the excluded area
-    }
-    setLanguage(false);
-  };
 
   return (
-    <div id="logo">
+    <div>
       <div onClick={isOpen ? toggleNav : undefined} className="bg-[#295CA4]">
         <header className="w-[100%]">
           <div
@@ -178,8 +141,6 @@ function Body() {
                 </li>
                 <li
                   className={`h-[100%] flex flex-col justify-end hover:bg-slate-300 hover:bg-opacity-20 hover:text-gray-900 duration-300 ease-in group`}
-                  onMouseEnter={toggleAboutEnter}
-                  onMouseLeave={toggleAboutLeave}
                 >
                   <a
                     href="#"
@@ -189,12 +150,12 @@ function Body() {
                   </a>
                   <span className="block w-[fill] h-[2px] group-hover:bg-red-900 rounded-full mt-auto duration-300 ease-in"></span>
                   <div
-                    className={`${
-                      about
-                        ? "grid grid-cols-2 max-w-[400px] absolute top-full bg-white rounded divide-x divide-gray-400 rounded-tl-none"
-                        : "hidden"
-                    } excludeAbout`}
-                    onMouseLeave={toggleAboutLeave}
+                    className=" hidden group-hover:grid group-hover:grid-cols-2 
+                                group-hover:max-w-[400px] group-hover:absolute 
+                                group-hover:top-full group-hover:bg-white 
+                                group-hover:rounded group-hover:divide-x 
+                                group-hover:divide-gray-400 group-hover:rounded-tl-none 
+                                group-hover:duration-300 group-hover:ease-out"
                   >
                     <section className="ml-[0.5rem] mt-[0.5rem] mb-[0.5rem] mr-0 pr-0">
                       <h2 className="font-bold p-1 pl-2">ማዕከላት</h2>
@@ -268,8 +229,6 @@ function Body() {
 
                 <li
                   className={`h-[100%] flex flex-col justify-end hover:bg-slate-300 hover:bg-opacity-20 hover:text-gray-900 duration-300 ease-in group `}
-                  onMouseEnter={toggleLearnEnter}
-                  onMouseLeave={toggleLearnLeave}
                 >
                   <a
                     href="#"
@@ -279,12 +238,7 @@ function Body() {
                   </a>
                   <span className="block w-[fill] h-[2px] group-hover:bg-red-900 rounded-full mt-auto duration-300 ease-in"></span>
                   <div
-                    className={`${
-                      learn
-                        ? "grid grid-cols-1 max-w-[300px] absolute top-full bg-white rounded divide-x divide-gray-400 rounded-tl-none"
-                        : "hidden"
-                    } excludeLearn`}
-                    onMouseLeave={toggleLearnLeave}
+                    className={`hidden group-hover:grid group-hover:grid-cols-1 group-hover:max-w-[300px] group-hover:absolute group-hover:top-full group-hover:bg-white group-hover:rounded group-hover:divide-x group-hover:divide-gray-400 group-hover:rounded-tl-none`}
                   >
                     <ul className="text-gray-700">
                       <li className="hover:bg-slate-300 rounded duration-300 ease-out p-1">
@@ -310,8 +264,6 @@ function Body() {
                 </li>
                 <li
                   className={`h-[100%] flex flex-col justify-end hover:bg-slate-300 hover:bg-opacity-20 hover:text-gray-900 duration-300 ease-in group `}
-                  onMouseEnter={toggleOthersEnter}
-                  onMouseLeave={toggleOthersLeave}
                 >
                   <a
                     href="#"
@@ -320,14 +272,7 @@ function Body() {
                     ሌሎች ድረ ገጾች
                   </a>
                   <span className="block w-[fill] h-[2px] group-hover:bg-red-900 rounded-full mt-auto duration-300 ease-in"></span>
-                  <div
-                    className={`${
-                      others
-                        ? "grid grid-cols-1 max-w-[300px] absolute top-full bg-white rounded divide-x divide-gray-400 rounded-tl-none"
-                        : "hidden"
-                    } excludeOthers`}
-                    onMouseLeave={toggleOthersLeave}
-                  >
+                  <div className="hidden group-hover:grid group-hover:grid-cols-1 group-hover:max-w-[300px] group-hover:absolute group-hover:top-full bg-white rounded divide-x divide-gray-400 rounded-tl-none">
                     <ul className="text-gray-700">
                       <li className="hover:bg-slate-300 rounded duration-300 ease-out p-1">
                         በኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተክርስቲያን መንበረ ፓትርያርክ የብፁዕ ወቅዱስ ልዩ
@@ -345,8 +290,6 @@ function Body() {
                 </li>
                 <li
                   className={`h-[100%] flex flex-col justify-end hover:bg-slate-300 hover:bg-opacity-20 hover:text-gray-900 duration-300 ease-in group `}
-                  onMouseEnter={toggleLanguageEnter}
-                  onMouseLeave={toggleLanguageLeave}
                 >
                   <a
                     href="#"
@@ -355,14 +298,7 @@ function Body() {
                     ቋንቋ
                   </a>
                   <span className="block w-[fill] h-[2px] group-hover:bg-red-900 rounded-full mt-auto duration-300 ease-in"></span>
-                  <div
-                    className={`${
-                      language
-                        ? "grid grid-cols-1 max-w-[300px] absolute top-full bg-white rounded divide-x divide-gray-400 rounded-tl-none"
-                        : "hidden"
-                    } excludeLanguage`}
-                    onMouseLeave={toggleLanguageLeave}
-                  >
+                  <div className="hidden group-hover:grid grid-cols-1 max-w-[300px] absolute top-full bg-white rounded divide-x divide-gray-400 rounded-tl-none">
                     <ul className="text-gray-700">
                       <li className="hover:bg-slate-300 rounded duration-300 ease-out p-1">
                         አማርኛ
@@ -400,22 +336,44 @@ function Body() {
               className="ml-[1rem]"
               onClick={() => setIsSearchOpen(!isSearchOpen)}
             >
-              <SearchIcon className="text-blue-500 h-6 w-6 md:mr-[1rem]" />
+              <MagnifyingGlassIcon className="text-blue-500 h-6 w-6 md:mr-[1rem]" />
             </button>
 
             {isSearchOpen && (
-              <div className="absolute top-10 right-[1rem] left-[60%] bg-white p-2 shadow-md rounded-lg flex">
-                <div className="flex w-full border rounded-md focus-within:ring-1 focus-within:ring-blue-400">
+              <div
+                className="absolute top-12 right-4 left-[50%] translate-x-[-50%] 
+               bg-white/40 backdrop-blur-lg shadow-lg 
+               p-3 rounded-2xl flex items-center gap-3 
+               border border-white/30 transition-all 
+               duration-300 ease-out scale-95 
+               animate-fade-in"
+              >
+                {/* Search Input Container */}
+                <div
+                  className="flex w-full border border-gray-300 rounded-full 
+                    focus-within:ring-2 focus-within:ring-blue-400 
+                    bg-white px-4 py-2 items-center gap-2 
+                    shadow-md transition-all"
+                >
+                  {/* Search Icon */}
+                  <MagnifyingGlassIcon
+                    className="h-6 w-6 text-gray-500 transition-all 
+                              hover:text-blue-500"
+                              type="submit"
+                  />
+
+                  {/* Input Field */}
                   <input
                     type="text"
                     placeholder="Search..."
-                    className="w-full focus:outline-none"
+                    className="w-full bg-transparent outline-none text-black
+                   placeholder-gray-900 "
                   />
-                  <button type="submit">
-                    <SearchIcon className="h-6 w-6  text-gray-500" />
-                  </button>
-                  <XIcon
-                    className="h-8 w-8 ml-2 mr-2 cursor-pointer mt-1 text-gray-500"
+
+                  {/* Close Icon */}
+                  <XMarkIcon
+                    className="h-8 w-8 cursor-pointer text-gray-500 
+                   hover:text-red-500 transition-all duration-200"
                     onClick={() => setIsSearchOpen(false)}
                   />
                 </div>
@@ -423,7 +381,7 @@ function Body() {
             )}
 
             <button className="mr-[1rem] md:hidden">
-              <MenuIcon
+              <Bars3Icon
                 className={`h-6 w-6 text-gray-900 ease-in-out duration-500 ${
                   rotated ? "rotate-180" : "rotate-0"
                 }`}
@@ -435,7 +393,10 @@ function Body() {
             </button>
           </div>
         </header>
-        <section className="bg-[#015896] block h-[40vh] mt-[10vh] md:mt-[15vh]">
+        <section
+          className="bg-[#015896] block h-[40vh] mt-[10vh] md:mt-[15vh]"
+          id="logo"
+        >
           <h2 className=" bg-[black] bg-opacity-[0.5] bg w-max m-auto text-center text-3xl text-white whitespace-nowrap pl-[0.5rem] pr-[0.5rem]">
             እንኳን ደህና መጡ!
           </h2>
