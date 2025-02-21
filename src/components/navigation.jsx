@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";import {
+import { useState, useEffect } from "react";
+import {
   MagnifyingGlassIcon,
   Bars3Icon,
   XMarkIcon,
@@ -6,8 +7,8 @@ import { useState, useEffect } from "react";import {
   ChevronRightIcon,
 } from "@heroicons/react/24/outline";
 
-
-function SmallScreenNav({ isOpen, toggleNav }) {
+import { motion } from "framer-motion";
+function SmallScreenNav({ isOpen, toggleNav, isSearchOpen, setIsSearchOpen }) {
   return (
     <div
       className={`fixed top-0 right-0 h-full w-[60%] bg-white shadow-lg transform ${
@@ -15,7 +16,10 @@ function SmallScreenNav({ isOpen, toggleNav }) {
       } md:hidden ease-in-out duration-500 pl-[3%] pr-[3%]`}
     >
       <nav className="flex justify-end h-[10vh]">
-        <button className=" mr-[3rem]">
+        <button
+          className=" mr-[3rem]"
+          onClick={() => setIsSearchOpen(!isSearchOpen)}
+        >
           <MagnifyingGlassIcon className="text-black h-6 w-6 " />
         </button>
         <button onClick={toggleNav} className=" mr-[3rem]">
@@ -77,7 +81,7 @@ function Logo({ small }) {
           className={` ${
             small
               ? "text-[0.8rem] md:text-[0.8rem] md:hidden lg:block text-gray-900 font-semibold leading-snug"
-              : "text-[1rem] md:text-[01rem] text-gray-900 font-semibold leading-snug md:hidden lg:block "
+              : "text-[1rem] md:text-[01rem] text-gray-900 font-semibold leading-snug md:hidden lg:block max-sm:hidden"
           }`}
         >
           በኢትዮጵያ ኦርቶዶድስ ተዋህዶ ቤተክርስቲያን <br />
@@ -87,7 +91,7 @@ function Logo({ small }) {
           className={`${
             small
               ? "hidden"
-              : "text-red-600 text-[0.8rem] font-bold md:hidden lg:text-[0.8rem] lg:block  "
+              : "text-red-600 text-[0.8rem] font-bold md:hidden lg:text-[0.8rem] lg:block max-sm:text-[1rem] "
           }`}
         >
           ማኅበራዊ ጉዳዮች
@@ -120,10 +124,14 @@ function Body() {
 
   return (
     <div>
-      <div onClick={isOpen ? toggleNav : undefined} className="bg-[#295CA4]">
-        <header className="w-[100%]">
+      <div
+        onClick={isOpen ? toggleNav : undefined}
+        className="bg-[#295CA4]"
+        id="logo"
+      >
+        <header className="w-[100%] z-[100]">
           <div
-            className={`fixed top-0 left-0 w-full flex justify-between bg-[url('cloud.png')] bg-cover bg-center backdrop-blur-sm transition-all duration-300 pl-[5%] pr-[5%] ${
+            className={`md:fixed top-0 left-0 w-full flex justify-between bg-[url('cloud.png')] bg-cover bg-center backdrop-blur-sm transition-all duration-300 pl-[5%] pr-[5%] ${
               small ? "h-[8vh] pl-[7%] pr-[7%]" : "h-[10vh] md:h-[15vh]"
             }`}
           >
@@ -340,44 +348,50 @@ function Body() {
             </button>
 
             {isSearchOpen && (
-              <div
-                className="absolute top-12 right-4 left-[50%] translate-x-[-50%] 
-               bg-white/40 backdrop-blur-lg shadow-lg 
-               p-3 rounded-2xl flex items-center gap-3 
-               border border-white/30 transition-all 
-               duration-300 ease-out scale-95 
-               animate-fade-in"
+              <motion.div
+                initial={{ opacity: 0, y: -10, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -10, scale: 0.9 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="absolute top-16 left-1/2 -translate-x-1/2
+               bg-white/30 backdrop-blur-xl shadow-2xl 
+               p-2 rounded-2xl flex items-center gap-2 
+               border border-white/40 transition-all duration-300 
+               ease-out scale-95 drop-shadow-xl 
+               w-[90%] max-w-[16rem] sm:w-[75%] sm:max-w-[20rem] max-sm:w-[13rem] max-sm:left-1/3 "
               >
                 {/* Search Input Container */}
                 <div
                   className="flex w-full border border-gray-300 rounded-full 
-                    focus-within:ring-2 focus-within:ring-blue-400 
-                    bg-white px-4 py-2 items-center gap-2 
-                    shadow-md transition-all"
+                 focus-within:ring-2 focus-within:ring-blue-500/50 
+                 bg-white px-3 py-0.5 items-center gap-2 
+                 shadow-lg transition-all transform 
+                 hover:scale-[1.02] sm:px-5 sm:py-3"
                 >
                   {/* Search Icon */}
                   <MagnifyingGlassIcon
-                    className="h-6 w-6 text-gray-500 transition-all 
-                              hover:text-blue-500"
-                              type="submit"
+                    className="h-5 w-5 text-gray-500 transition-all 
+                   hover:text-blue-600 hover:scale-110 sm:h-6 sm:w-6"
+                    type="submit"
                   />
 
                   {/* Input Field */}
                   <input
                     type="text"
                     placeholder="Search..."
-                    className="w-full bg-transparent outline-none text-black
-                   placeholder-gray-900 "
+                    className="w-full bg-transparent outline-none text-gray-800
+                   placeholder-gray-500 text-sm font-medium sm:text-lg"
                   />
 
                   {/* Close Icon */}
                   <XMarkIcon
-                    className="h-8 w-8 cursor-pointer text-gray-500 
-                   hover:text-red-500 transition-all duration-200"
+                    className="h-6 w-6 cursor-pointer text-gray-500 
+                   hover:text-red-500 transition-all duration-200 
+                   hover:rotate-90 hover:scale-110 sm:h-8 sm:w-8"
                     onClick={() => setIsSearchOpen(false)}
                   />
                 </div>
-              </div>
+              </motion.div>
             )}
 
             <button className="mr-[1rem] md:hidden">
@@ -387,23 +401,26 @@ function Body() {
                 }`}
                 onClick={() => {
                   toggleNav();
+                  setIsSearchOpen(false);
                   setRotated(!rotated);
                 }}
               />
             </button>
           </div>
         </header>
-        <section
-          className="bg-[#015896] block h-[40vh] mt-[10vh] md:mt-[15vh]"
-          id="logo"
-        >
-          <h2 className=" bg-[black] bg-opacity-[0.5] bg w-max m-auto text-center text-3xl text-white whitespace-nowrap pl-[0.5rem] pr-[0.5rem]">
+        <section className="bg-[#015896] block h-[40vh] md:mt-[15vh]">
+          <h2 className="bg-[black] bg-opacity-[0.5] bg w-max m-auto text-center text-3xl text-white whitespace-nowrap pl-[0.5rem] pr-[0.5rem]">
             እንኳን ደህና መጡ!
           </h2>
           <img src="logo.png" className="justify-center m-auto  h-[35vh]" />
         </section>
       </div>
-      <SmallScreenNav isOpen={isOpen} toggleNav={toggleNav} />
+      <SmallScreenNav
+        isOpen={isOpen}
+        toggleNav={toggleNav}
+        isSearchOpen={isSearchOpen}
+        setIsSearchOpen={setIsSearchOpen}
+      />
       <button
         className={`${
           large

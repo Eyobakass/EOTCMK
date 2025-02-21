@@ -10,7 +10,9 @@ import {
   BookOpenIcon,
   QuestionMarkCircleIcon,
 } from "@heroicons/react/24/outline";
-
+import{
+  motion
+} from 'framer-motion'
 function AboutUs() {
   const [count, setCount] = useState(0);
   const timelineData = [
@@ -72,10 +74,10 @@ function AboutUs() {
     },
   ];
   return (
-    <div className="bg-[#015896] pl-[6%] pr-[6%] pb-[6rem] pt-[2rem] text-white">
+    <div className="bg-[#015896] lg:pl-[10%] lg:pr-[10%] pl-[6%] pr-[6%] pb-[6rem] pt-[2rem]  text-[#ECF0F2]">
       <h1 className="text-[2rem] mt-[1rem] "> ስለ ማኅበረ ቅዱሳን መሰረታዊ መረጃዎች</h1>
-      <div className="md:flex">
-        <main className="md:w-[55vw]">
+      <div className="md:flex justify-between">
+        <main className="md:w-[50vw]">
           <section className="mb-[3rem]">
             <header className="flex mt-[1rem] mb-[1.5rem] ">
               <h2 className="pr-[1rem] text-[1.3rem] font-bold">ስያሜ</h2>
@@ -112,27 +114,35 @@ function AboutUs() {
               <h2 className="pr-[1rem] text-[1.3rem] font-bold">እሴቶች</h2>
               <span className="block bg-[#5F95BB] h-[1px] w-full mt-[1.3rem]  "></span>
             </header>
-            <div className="absolute left-6 top-0 w-1 h-full bg-white border-l-4 border-dashed border-white"></div>
 
             {/* Timeline Items */}
-            <div className="space-y-8 pt-[2rem] ">
+            <div className="space-y-16 pt-[2rem]  ">
               {timelineData.map((item, index) => (
-                <div key={index} className="relative flex items-start gap-6">
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{
+                    duration: 0.2,
+                    ease: "easeOut",
+                    delay: index * 0.07,
+                  }}
+                  viewport={{ once: false }}
+                  className=" flex items-start justify-between gap-6 pb-7"
+                >
                   {/* Icon Wrapper */}
-                  <div
-                    className={`flex items-center justify-center`}
-                  >
+                  <div className={`flex items-center justify-center`}>
                     {item.icon}
                   </div>
 
                   {/* Text Content */}
-                  <div className="  ">
-                    <h3 className="text-lg font-bold ">
-                      {item.title}
-                    </h3>
-                    <p className="">{item.description}</p>
+                  <div className="">
+                    <h3 className="text-lg font-bold">{item.title}</h3>
+                    <p className="text-[0.8rem] text-justify leading-relaxed">
+                      {item.description}
+                    </p>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </section>
@@ -184,11 +194,11 @@ function AboutUs() {
             </ul>
           </section>
         </main>
-        <aside className="md:ml-auto">
-          <figure className="mt-[3rem] mb-[5rem]">
+        <aside className="mt-[4rem] ml-auto">
+          <figure className="mb-[5rem] ml-auto">
             <img
               src="abune-gorgorios.jpg"
-              className="md:w-[28vw] ml-auto mr-auto"
+              className="md:w-[23vw]  ml-auto "
               alt="አቡነ ጎርጎርዮስ ካልዕ"
             />
             <figcaption className="text-center text-[0.8rem] mt-[1rem]">
@@ -200,7 +210,7 @@ function AboutUs() {
           <figure className="">
             <img
               src="mk-building1-450x378.jpg"
-              className="md:w-[25vw] w-[50vw] ml-auto mr-auto md:ml-auto md:mr-auto "
+              className="md:w-[20vw] w-[40vw] ml-auto mr-auto md:ml-auto md:mr-auto "
               alt="የማኅበሩ ህንጻ"
             />
             <figcaption className="text-center text-[0.8rem] mt-[1rem] ">
