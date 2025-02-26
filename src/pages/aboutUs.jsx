@@ -198,7 +198,7 @@ function AboutUs() {
           <figure className="mb-[5rem] ml-auto">
             <img
               src="abune-gorgorios.jpg"
-              className="md:w-[23vw]  ml-auto "
+              className="md:w-[23vw]  ml-auto mr-auto "
               alt="አቡነ ጎርጎርዮስ ካልዕ"
             />
             <figcaption className="text-center text-[0.8rem] mt-[1rem]">
